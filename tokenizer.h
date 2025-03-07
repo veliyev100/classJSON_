@@ -1,28 +1,29 @@
-#ifndef PARSER_JSON_TOKEN
-#define PARSER_JSON_TOKEN
+#ifndef TOKENIZER_H
+#define TOKENIZER_H
 
-#include <string>
-#include <fstream>
 #include <iostream>
+#include <fstream>
+#include <string>
 
 enum class TOKEN
 {
     CURLY_OPEN,
     CURLY_CLOSE,
     COLON,
-    STRING,
     NUMBER,
+    STRING,
+    BOOLEAN,
     ARRAY_OPEN,
     ARRAY_CLOSE,
-    COMMA,
-    BOOLEAN,
-    NULL_TYPE
+    NULL_TYPE,
+    COMMA
 };
 
-struct  Token
+class Token
 {
-    std::string value;
+public:
     TOKEN type;
+    std::string value;
     std::string toString();
 };
 
@@ -30,15 +31,14 @@ class Tokenizer
 {
 private:
     std::fstream file;
-    size_t prevPos;
+    std::streampos prevPos;
 
 public:
     Tokenizer(std::string fileName);
-    auto getWithoutWhiteSpace();
     auto getToken();
-    auto hasMoreTokens();
+    auto getWithoutWhiteSpace();
     void rollBackToken();
+    auto hasMoreTokens();
 };
 
-
-#endif //PARSER_JSON_TOKEN
+#endif //TOKENIZER_H

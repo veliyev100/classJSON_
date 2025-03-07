@@ -13,7 +13,7 @@ private:
     Tokenizer tokenizer;
 
 public:
-    JSONParser(const std::string filename): tokenizer(filename){}
+    JSONParser(const std::string filename): tokenizer(filename) {}
     void parse();
 
     std::shared_ptr<JSONNode> parseObject();
@@ -22,8 +22,6 @@ public:
     std::shared_ptr<JSONNode> parseList();
     std::shared_ptr<JSONNode> parseBoolean();
     std::shared_ptr<JSONNode> parseNull();
-}
-
-
+};
 
 #endif //PARSER_JSON_PARSER
